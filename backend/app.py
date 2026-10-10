@@ -50,7 +50,8 @@ def health():
         cursor.close()
         connection.close()
         return jsonify({"status": "ok", "database": "connected"})
-    except Error:
+    except Error as error:
+        app.logger.error("Database health check failed: %s", error)
         return jsonify({"status": "degraded", "database": "unavailable"}), 503
 
 
