@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#5b5bd6" />
+    <title>Flowlist — Make progress, beautifully.</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/extensions.css" />
+  </head>
+  <body>
+    <div class="orb orb-one"></div><div class="orb orb-two"></div>
+    <main class="site-shell">
+      <section id="auth-view" class="auth-view">
+        <nav class="nav"><a class="brand" href="#"><span class="brand-mark">✓</span> Flowlist</a><p>Make room for what matters.</p></nav>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">A calmer way to work</span>
+            <h1>Every meaningful day starts with <em>one clear task.</em></h1>
+            <p class="hero-text">Bring your priorities into focus. Plan simply, move deliberately, and see your progress at a glance.</p>
+            <div class="mini-card"><div class="mini-check">✓</div><div><strong>Design project homepage</strong><span>Today · In progress</span></div><div class="progress-dots"><i></i><i></i><i></i></div></div>
+          </div>
+          <div class="auth-card">
+            <div id="login-panel">
+              <div class="card-heading"><span class="card-icon">✦</span><h2>Welcome back</h2><p>Pick up right where you left off.</p></div>
+              <form id="login-form" class="form" novalidate>
+                <label>Email<input name="email" type="email" placeholder="you@example.com" autocomplete="email" required /></label>
+                <label>Password<input name="password" type="password" placeholder="Your password" autocomplete="current-password" required /></label>
+                <button class="button button-primary" type="submit">Sign in <span>→</span></button>
+              </form>
+              <p class="form-switch">New to Flowlist? <button data-show="register-panel" type="button">Create an account</button></p>
+            </div>
+            <div id="register-panel" hidden>
+              <div class="card-heading"><span class="card-icon">✦</span><h2>Create your space</h2><p>A little organization goes a long way.</p></div>
+              <form id="register-form" class="form" novalidate>
+                <label>Your name<input name="name" type="text" placeholder="Alex Morgan" autocomplete="name" required /></label>
+                <label>Email<input name="email" type="email" placeholder="you@example.com" autocomplete="email" required /></label>
+                <label>Password <small>8+ characters</small><input name="password" type="password" placeholder="Choose a secure password" autocomplete="new-password" minlength="8" required /></label>
+                <button class="button button-primary" type="submit">Create account <span>→</span></button>
+              </form>
+              <p class="form-switch">Already have an account? <button data-show="login-panel" type="button">Sign in</button></p>
+            </div>
+            <p id="auth-message" class="message" role="alert"></p>
+          </div>
+        </div>
+      </section>
+
+      <section id="app-view" class="app-view" hidden>
+        <aside class="sidebar">
+          <a class="brand" href="#"><span class="brand-mark">✓</span> Flowlist</a>
+          <div class="profile"><div id="avatar" class="avatar">A</div><div><strong id="user-name">Your workspace</strong><span>Personal space</span></div></div>
+          <nav class="side-nav"><a class="active" href="#tasks"><span>▦</span> My tasks</a><a href="#completed"><span>✓</span> Completed</a></nav>
+          <button id="logout-button" class="logout" type="button">← &nbsp;Sign out</button>
+        </aside>
+        <div class="workspace">
+          <header class="workspace-header"><div><p id="today-label" class="date-label"></p><h1>Good day, <span id="greeting-name">there</span>.</h1><p class="subheading">Here’s a clear view of what deserves your attention.</p></div><button id="open-task-modal" class="button button-primary new-task" type="button"><span>＋</span> New task</button></header>
+          <div class="overview"><article><span class="overview-icon lilac">☷</span><div><strong id="all-count">0</strong><span>All tasks</span></div></article><article><span class="overview-icon amber">◷</span><div><strong id="progress-count">0</strong><span>In progress</span></div></article><article><span class="overview-icon mint">✓</span><div><strong id="done-count">0</strong><span>Completed</span></div></article></div>
+          <section class="tasks-section" id="tasks"><div class="section-top"><div><h2>Your tasks</h2><p>Stay focused. You’re doing great.</p></div><div id="filters" class="filters"><button class="filter active" data-status="">All</button><button class="filter" data-status="pending">To do</button><button class="filter" data-status="in_progress">In progress</button><button class="filter" data-status="completed">Done</button></div></div><div class="task-tools"><label class="search-box" for="task-search">⌕<input id="task-search" type="search" placeholder="Search your tasks" /></label><select id="task-sort" aria-label="Sort tasks"><option value="newest">Newest first</option><option value="due">Due date</option><option value="priority">Priority</option></select></div><div id="task-list" class="task-list"></div><div id="empty-state" class="empty-state" hidden><div>✦</div><h3>Nothing here yet</h3><p>Add a task and give your day some direction.</p><button class="text-button" data-open-modal type="button">Create your first task →</button></div></section>
+        </div>
+      </section>
+    </main>
+
+    <div id="task-modal" class="modal" hidden><div class="modal-backdrop" data-close-modal></div><section class="modal-card"><button class="modal-close" data-close-modal type="button" aria-label="Close">×</button><div class="modal-heading"><span class="card-icon">＋</span><h2 id="modal-title">Create a task</h2><p>Small steps add up to meaningful progress.</p></div><form id="task-form" class="form"><input id="task-id" type="hidden" /><label>Task title<input id="task-title" name="title" type="text" placeholder="What needs your attention?" maxlength="255" required /></label><label>Description <small>Optional</small><textarea id="task-description" name="description" placeholder="Add a little context…" maxlength="2000"></textarea></label><div class="form-row"><label>Status<select id="task-status" name="status"><option value="pending">To do</option><option value="in_progress">In progress</option><option value="completed">Completed</option></select></label><label>Priority<select id="task-priority" name="priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></label></div><label>Due date <small>Optional</small><input id="task-due-date" name="due_date" type="date" /></label><button class="button button-primary" type="submit"><span id="task-submit-text">Create task</span> <span>→</span></button></form><p id="task-message" class="message" role="alert"></p></section></div>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="js/config.js"></script><script src="js/app.js"></script>
+  </body>
+</html>
