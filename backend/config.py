@@ -16,6 +16,11 @@ class Config:
     JWT_SECRET = os.getenv("JWT_SECRET", "change-me-in-production")
     JWT_EXPIRES_HOURS = int(os.getenv("JWT_EXPIRES_HOURS", "24"))
     FRONTEND_URL = os.getenv("FRONTEND_URL", "http://127.0.0.1:5500")
+    FRONTEND_URLS = [
+        origin.strip().rstrip("/")
+        for origin in os.getenv("FRONTEND_URLS", FRONTEND_URL).split(",")
+        if origin.strip()
+    ]
 
     DB_CONFIG = {
         "host": os.getenv("DB_HOST", "localhost"),
